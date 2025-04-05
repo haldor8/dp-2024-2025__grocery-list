@@ -6,7 +6,6 @@ import com.fges.data_structures.Item;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
 
 public class CsvGroceryDAO implements GroceryDAO {
     private final String filePath;
@@ -17,6 +16,7 @@ public class CsvGroceryDAO implements GroceryDAO {
 
     @Override
     public GroceryList load() throws IOException {
+        // Implémente le chargement sous le format csv
         GroceryList groceryList = new GroceryList();
 
         if (!Files.exists(Paths.get(filePath))) {
@@ -57,6 +57,7 @@ public class CsvGroceryDAO implements GroceryDAO {
 
     @Override
     public void save(GroceryList list) throws IOException {
+        // Sauvegarde sous le format csv
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write("name,quantity,category");
             writer.newLine();

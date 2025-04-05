@@ -38,4 +38,6 @@ public class Item {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public void addQuantity(int quantity) { this.quantity += quantity; }
 }

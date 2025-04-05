@@ -8,7 +8,6 @@ import com.fges.data_structures.*;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class GroceryManager {
     private final GroceryDAO dao;
@@ -20,19 +19,22 @@ public class GroceryManager {
     }
 
     private GroceryDAO createDAO(String fileName, String format) {
+        String correctFileName = reformatFileName(fileName, format);
+
         return format.equalsIgnoreCase("csv")
-                ? new CsvGroceryDAO(fileName)
-                : new JsonGroceryDAO(fileName);
+                ? new CsvGroceryDAO(correctFileName)
+                : new JsonGroceryDAO(correctFileName);
     }
 
-    public int handleCommand(String command, List<String> positionalArgs) throws IOException {
+    public int handleCommand(String command, List<String> positionalArgs, String category) throws IOException {
+        // Switch case pour gérer la commande passée en CLI
         switch (command) {
             case "add":
-                if (positionalArgs.size() < 4) {
+                if (positionalArgs.size() < 3) {
                     System.err.println("Missing arguments for add (need name, quantity, category)");
                     return 1;
                 }
-                return addItem(positionalArgs.get(1), positionalArgs.get(2), positionalArgs.get(3));
+                return addItem(positionalArgs.get(1), positionalArgs.get(2), category);
 
             case "remove":
                 if (positionalArgs.size() < 2) {
@@ -52,16 +54,22 @@ public class GroceryManager {
 
     private int addItem(String name, String quantityStr, String category) throws IOException {
         int quantity;
+
         try {
             quantity = Integer.parseInt(quantityStr);
         } catch (NumberFormatException e) {
             System.err.println("Invalid quantity format");
             return 1;
         }
-        if (category.equalsIgnoreCase("inconnu")) {
-            category = "default";
+
+        // Vérifier si l'élément existe réellement ou non
+        int itemIndex = groceryList.findElementIndex(name, category);
+        if(itemIndex != -1){
+            groceryList.getListeObjets().get(itemIndex).addQuantity(quantity);
+        }else{
+            groceryList.addItem(new Item(name, quantity, category));
         }
-        groceryList.addItem(new Item(name, quantity, category));
+
         dao.save(groceryList);
         return 0;
     }
@@ -95,11 +103,18 @@ public class GroceryManager {
 
             for (Item item : items) {
                 if (item.getCategory().equals(category)) {
-                    System.out.println(item.getName());
+                    System.out.println(item.getName() + ": " + item.getQuantity());
                 }
             }
         }
         return 0;
+    }
+
+    private String reformatFileName(String fileName, String format){
+        // Garanti le bon format de fichier même si l'utilisateur rentre des extensions factices ou aucune
+
+        String baseName = fileName.replaceAll("\\.[^.]+$", "");
+        return baseName + "." + format;
     }
 
 }

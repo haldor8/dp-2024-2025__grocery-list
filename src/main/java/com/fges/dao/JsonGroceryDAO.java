@@ -16,6 +16,7 @@ public class JsonGroceryDAO implements GroceryDAO {
 
     @Override
     public GroceryList load() throws IOException {
+        // Implémente le chargement de fichier pour le format json
         if (!file.exists()) {
             return new GroceryList();
         }
@@ -24,6 +25,7 @@ public class JsonGroceryDAO implements GroceryDAO {
 
     @Override
     public void save(GroceryList list) throws IOException {
+        // Sauvegarde sous format json
         OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValue(file, list);
     }
 }

@@ -11,11 +11,13 @@ public class Main {
     }
 
     public static int exec(String[] args) throws IOException {
+        // Parse la commande pour l'exécuter
+
         Options cliOptions = new Options();
         CommandLineParser parser = new DefaultParser();
 
         cliOptions.addRequiredOption("s", "source", true, "File containing the grocery list");
-        cliOptions.addOption("o", "output", true, "Output format (json or csv)");
+        cliOptions.addOption("f", "format", true, "File format (json or csv)");
         cliOptions.addOption("c", "category", true, "Specify the category of the item");
 
         CommandLine cmd;
@@ -27,7 +29,7 @@ public class Main {
         }
 
         String fileName = cmd.getOptionValue("s");
-        String outputFormat = cmd.getOptionValue("o", "json"); // Par défaut JSON si non précisé
+        String outputFormat = cmd.getOptionValue("f", "json"); // Par défaut JSON si non précisé
         String category = cmd.getOptionValue("c", "default"); // "default" si non spécifié
 
         List<String> positionalArgs = cmd.getArgList();
@@ -39,7 +41,7 @@ public class Main {
         String command = positionalArgs.get(0);
         GroceryManager manager = new GroceryManager(fileName, outputFormat);
 
-        return manager.handleCommand(command, positionalArgs);
+        return manager.handleCommand(command, positionalArgs, category);
     }
 
 }
