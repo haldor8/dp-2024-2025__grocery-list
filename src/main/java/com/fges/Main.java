@@ -16,6 +16,7 @@ public class Main {
 
         cliOptions.addRequiredOption("s", "source", true, "File containing the grocery list");
         cliOptions.addOption("o", "output", true, "Output format (json or csv)");
+        cliOptions.addOption("c", "category", true, "Specify the category of the item");
 
         CommandLine cmd;
         try {
@@ -27,6 +28,7 @@ public class Main {
 
         String fileName = cmd.getOptionValue("s");
         String outputFormat = cmd.getOptionValue("o", "json"); // Par défaut JSON si non précisé
+        String category = cmd.getOptionValue("c", "default"); // "default" si non spécifié
 
         List<String> positionalArgs = cmd.getArgList();
         if (positionalArgs.isEmpty()) {
@@ -37,7 +39,7 @@ public class Main {
         String command = positionalArgs.get(0);
         GroceryManager manager = new GroceryManager(fileName, outputFormat);
 
-        // Tous les managers devront utiliser la même méthode, potentiellement ajouter de l'héritage vers un Manager général
         return manager.handleCommand(command, positionalArgs);
     }
+
 }
