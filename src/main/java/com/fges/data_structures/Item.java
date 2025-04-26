@@ -39,5 +39,7 @@ public class Item {
         this.category = category;
     }
 
-    public void addQuantity(int quantity) { this.quantity += quantity; }
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+    }
 }
