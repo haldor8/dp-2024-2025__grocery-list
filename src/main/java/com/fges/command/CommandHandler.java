@@ -38,7 +38,6 @@ public class CommandHandler {
                 return new ListItemsCommand(groceryList).execute();
 
             case "info":
-                // La commande info ne prend pas d'arguments, ils sont donc ignorés
                 return new InfoCommand().execute();
 
             default:
