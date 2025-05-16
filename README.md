@@ -48,13 +48,13 @@ It is a command line application.
 If you are not familiar with CLI applications, you need to know a few things:
 
 - Application starts with stdout, stderr and stdin
-    - stderr: to log things for debug purpose
-    - stdout: to output something
-    - stdin: to communicate with the application while it is running
+  - stderr: to log things for debug purpose
+  - stdout: to output something
+  - stdin: to communicate with the application while it is running
 - Application can be ran with arguments (see 1000's of examples on the internet)
 - Application terminated with a status code
-    - 0 for success
-    - anything else for failure
+  - 0 for success
+  - anything else for failure
 
 ## Available commands at start
 
@@ -97,6 +97,43 @@ java -jar ./target/dp-2024-2025__grocery-list-1.0-SNAPSHOT.jar -s groceries.json
 ```bash
 java -jar ./target/dp-2024-2025__grocery-list-1.0-SNAPSHOT.jar -s groceries.json remove "Milk"
 ```
+
+### Add an item with a specific category
+
+```bash
+java -jar ./target/dp-2024-2025__grocery-list-1.0-SNAPSHOT.jar -s groceries.json -c dairy add "Milk" 10
+```
+
+### Display system information
+
+```bash
+java -jar ./target/dp-2024-2025__grocery-list-1.0-SNAPSHOT.jar info
+```
+
+This command will output:
+- Current date
+- Operating system information
+- Java version
+
+### Choose a different file format
+
+The application supports both JSON and CSV formats:
+
+```bash
+# Using JSON format (default)
+java -jar ./target/dp-2024-2025__grocery-list-1.0-SNAPSHOT.jar -s groceries.json -f json add "Milk" 10
+
+# Using CSV format
+java -jar ./target/dp-2024-2025__grocery-list-1.0-SNAPSHOT.jar -s groceries.csv -f csv add "Milk" 10
+```
+
+### Start a web server interface
+
+```bash
+java -jar ./target/dp-2024-2025__grocery-list-1.0-SNAPSHOT.jar -s groceries.json web 8080
+```
+
+This will start a web server on port 8080 (or any specified port, default is 3000) which provides a web interface to manage your grocery list.
 
 ## About reports
 
