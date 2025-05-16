@@ -18,6 +18,7 @@ public class CommandHandler {
      * Gère la commande passée en CLI
      */
     public int handleCommand(String command, List<String> positionalArgs, String category) throws IOException {
+        System.out.println(positionalArgs);
         switch (command) {
             case "add":
                 if (positionalArgs.size() < 3) {
@@ -39,6 +40,17 @@ public class CommandHandler {
 
             case "info":
                 return new InfoCommand().execute();
+
+            case "web":
+                int port = 3000; // Port par défaut
+                if (positionalArgs.size() > 1) {
+                    try {
+                        port = Integer.parseInt(positionalArgs.get(1));
+                    } catch (NumberFormatException e) {
+                        System.err.println("Invalid port number provided. Using default port 8080.");
+                    }
+                }
+                return new WebCommand().execute(port, this);
 
             default:
                 System.err.println("Unknown command: " + command);

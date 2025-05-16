@@ -28,8 +28,8 @@ public class CLIParser {
         CommandLine cmd = parser.parse(cliOptions, args);
 
         String fileName = cmd.getOptionValue("s", ""); // Empty string as default if not provided
-        String outputFormat = cmd.getOptionValue("f", "json"); // Par défaut JSON si non précisé
-        String category = cmd.getOptionValue("c", "default"); // "default" si non spécifié
+        String outputFormat = cmd.getOptionValue("f", "json"); // JSON by default if not given
+        String category = cmd.getOptionValue("c", "default"); // "default" if not specified
 
         List<String> positionalArgs = cmd.getArgList();
         if (positionalArgs.isEmpty()) {

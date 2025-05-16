@@ -1,5 +1,7 @@
 package com.fges;
 
+import fr.anthonyquere.*;
+
 import org.apache.commons.cli.*;
 import com.fges.cli.CLIParser;
 import com.fges.cli.CLIParameters;
