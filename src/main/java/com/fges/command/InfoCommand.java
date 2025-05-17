@@ -27,13 +27,4 @@ public class InfoCommand {
 
         return 0;
     }
-
-    // Pour usage indépendant si nécessaire
-    public static void main(String[] args) {
-        String osName = System.getProperty("os.name");
-        String javaVersion = System.getProperty("java.version");
-
-        System.out.println("Operating System: " + osName);
-        System.out.println("Java Version: " + javaVersion);
-    }
 }

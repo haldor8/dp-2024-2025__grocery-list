@@ -57,4 +57,8 @@ public class CommandHandler {
                 return 1;
         }
     }
+
+    public GroceryList getGroceryList() {
+        return groceryList;
+    }
 }

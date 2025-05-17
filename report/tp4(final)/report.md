@@ -12,7 +12,7 @@ La commande `info` a bien été implémentée, mais d’une manière un peu mala
 ---
 ## Quels design patterns avons-nous utilisés et pourquoi ?
 - **Command** : Utilisé pour toutes les commandes (`add`, `remove`, `list`, `info`, `web`). Chaque commande est une classe séparée, ce qui rend le code plus organisé et facile à étendre.
-- **Factory** : Utilisé dans `DAOFactory` pour créer automatiquement le bon type de DAO en fonction du format de fichier (JSON, XML, etc.).
+- **Factory** : Utilisé dans `DAOFactory` pour créer automatiquement le bon type de DAO en fonction du format de fichier (JSON, CSV, etc.).
 - **DAO** : Permet de séparer la logique métier de l’accès aux fichiers. C’est plus clair et plus facile à maintenir.
 ---
 ## Réponses aux questions
